@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostDetailResource;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -30,21 +31,22 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'news_content' => 'required|string',
-        //     'author' => 'required|string|max:100',
-        //     'created_at' => 'nullable|date',
-        // ]);
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'news_content' => 'required',
+            // 'author' => 'required|string|max:100',
+            // 'created_at' => 'nullable|date',
+        ]);
+        $request['author'] = Auth::user()->id;
+        $post = Post::create($request->all());
+        
         // $post = Post::create([
-        //     'title' => $request->title,
-        //     'news_content' => $request->news_content,
-        //     'author' => $request->author,
+            // 'title' => $request->title,
+            // 'news_content' => $request->news_content,
+            // 'author' => $request->author,
         //     'created_at' => $request->created_at ? date($request->created_at) : now(),
         // ]);
         // return response()->json(['data' => new PostDetailResource($post)], 201);
-        return response()->json([
-            'message' => 'This endpoint is not implemented yet.'
-        ], 501);
+        return new PostDetailResource($post->loadMissing('writer:id,username'));
     }
 }
