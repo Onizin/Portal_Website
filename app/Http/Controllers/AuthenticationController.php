@@ -9,7 +9,6 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
 
-
 class AuthenticationController extends Controller
 {
     public function login(Request $request)
