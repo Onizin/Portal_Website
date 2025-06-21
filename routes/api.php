@@ -9,6 +9,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout',[AuthenticationController::class, 'logout']);
     Route::get('/me',[AuthenticationController::class, 'me']);
     Route::post('/posts',[PostController::class, 'store']);
+    Route::patch('/posts/{id}',[PostController::class, 'update']);
 });
 
 Route::post('/login',[AuthenticationController::class, 'login']);

@@ -14,7 +14,7 @@ class PostController extends Controller
     {
         $posts = Post::all();
         // return response()->json(['data'=>$posts]);
-        return PostResource::collection($posts);
+        return PostDetailResource::collection($posts->loadMissing('writer:id,username'));
     }
 
     public function show($id)
@@ -48,5 +48,16 @@ class PostController extends Controller
         // ]);
         // return response()->json(['data' => new PostDetailResource($post)], 201);
         return new PostDetailResource($post->loadMissing('writer:id,username'));
+    }
+    public function update(Request $request, $id)
+    {
+    //     $post = Post::findOrFail($id);
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'news_content' => 'required',
+    //     ]);
+    //     $post->update($request->all());
+    //     return new PostDetailResource($post->loadMissing('writer:id,username'));
+        dd('update');   
     }
 }
