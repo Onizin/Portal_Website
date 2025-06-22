@@ -20,4 +20,15 @@ class CommentController extends Controller
         $comment = Comment::create($request->all());
         return new CommentResource($comment->loadMissing('commentator'));
     }
+    public function update(Request $request, $id)
+    {
+        // $this->authorize('update', $comment);
+
+        $request->validate([
+            'comment_content' => 'required',
+        ]);
+
+        $comment = Comment::update($request->all());
+        return new CommentResource($comment->loadMissing('commentator:id,username'));
+    } 
 }

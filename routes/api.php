@@ -15,6 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Komentar
     Route::post('/comment',[CommentController::class, 'store']);
+    Route::patch('/comment/{id}',[CommentController::class, 'update'])->middleware('pemilik-komentar');
 });
 
 Route::post('/login',[AuthenticationController::class, 'login']);
