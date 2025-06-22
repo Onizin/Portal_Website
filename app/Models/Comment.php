@@ -10,7 +10,7 @@ use App\Models\User;
 
 class Comment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'post_id',
         'user_id',
