@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\CommentResource;
 
 class CommentController extends Controller
 {
@@ -12,6 +15,9 @@ class CommentController extends Controller
             'post_id' => 'required|exists:posts,id',
             'comment_content' => 'required|',
         ]);
-        
+
+        $request['user_id'] = Auth()->user()->id;
+        $comment = Comment::create($request->all());
+        return new CommentResource($comment->loadMissing('commentator'));
     }
 }
