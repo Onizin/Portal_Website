@@ -1,6 +1,6 @@
 ## Database Structure
 
-Pada proyek ini saya menggunakan laragon, jika anda menggunakan xampp tools lainnya dapat digunakan, database dikonfigurasi pada file `.env` dengan nama sesuai variabel `DB_DATABASE`. Terdapat tiga tabel utama yang telah dibuat melalui migration, yaitu: `users`, `posts`, dan `comments`. Berikut penjelasan detail mengenai masing-masing tabel:
+Pada proyek ini saya menggunakan laragon, jika anda menggunakan xampp tools lainnya dapat digunakan, database dikonfigurasi pada file `.env` dengan nama sesuai variabel `DB_DATABASE`. Disini saya menggunakan nama database adalah 'laravel_api_tutorial' Terdapat tiga tabel utama yang telah dibuat melalui migration, yaitu: `users`, `posts`, dan `comments`. Berikut penjelasan detail mengenai masing-masing tabel:
 
 ### 1. Tabel `users`
 
