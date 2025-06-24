@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostDetailResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class PostController extends Controller
 {
@@ -37,6 +39,16 @@ class PostController extends Controller
             // 'author' => 'required|string|max:100',
             // 'created_at' => 'nullable|date',
         ]);
+        $image = null;
+
+        if($request->file){
+            $fileName = $this->generateRandomString();
+            $extension = $request->file->extension();
+            $image =$fileName . '.' . $extension;
+
+            Storage::putFileAs('public/images', $request->file,$image);
+        }
+        $request['image'] = $image;
         $request['author'] = Auth::user()->id;
         $post = Post::create($request->all());
         
@@ -69,5 +81,15 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
         return new PostDetailResource($post->loadMissing('writer:id,username'));
+    }
+
+    function generateRandomString($length = 30) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
