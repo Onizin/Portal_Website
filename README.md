@@ -76,4 +76,4 @@ Setiap controller menangani proses CRUD (Create, Read, Update, Delete) sesuai en
 
 ### Penggunaan Postman untuk Konfigurasi API
 
-Postman adalah alat bantu yang digunakan untuk menguji dan mengonfigurasi endpoint API secara interaktif.
+konfigutasi postman terdapat beberapa collection, yaitu terdapat post (untuk get data dan detail data), auth(untuk login token, register, dan logout token), dan Comment(untuk crud comment).
